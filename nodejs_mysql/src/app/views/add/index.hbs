@@ -1,0 +1,23 @@
+<div class="tabla_info">                                                                                <table>
+      <tr>
+        <th>Package Name</th>
+        <th>Category Name</th>
+        <th>Sub-Category Name</th>
+        <th>Description</th>
+        <th>Price</th>
+      </tr>
+      {{#each list_info}}
+         <tr>
+           <td>{{packages_name}}</td>
+           <td>{{category_name}}</td>
+           <td>{{subcateg_name}}</td>
+           <td>{{description}}</td>
+	   <td>{{price}}</td>
+         </tr>
+      {{else}}
+         <div class="card">
+           <p>You don't have Information created yet</p>
+         <div>
+      {{/each}}
+     </table>
+</div>

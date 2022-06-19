@@ -1,0 +1,27 @@
+<div class="tabla_info">
+  <table>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Category ID</th>
+	<th>Actions</th>
+      </tr>
+      {{#each list_subcateg}}
+         <tr>
+           <td>{{id}}</td>
+           <td>{{name}}</td>
+           <td>{{category_id}}</td>
+	   <td>
+             <a href="/add/subcat_delete/{{id}}" id="delete">Delete</a>
+             <a href="/add/subcat_edit/{{id}}" id="edit">Edit</a>
+           </td>
+         </tr>
+       {{else}}
+          <div class="card">
+            <p>You don't have sub-categories created yet</p>
+            <a href="/subcateg">Create ONE</a>
+          <div>
+      {{/each}}
+  </table>
+  <a href="/add/subcateg" id="new">ADD NEW SUB-CATEGORY</a>
+</div>

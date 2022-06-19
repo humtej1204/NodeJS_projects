@@ -1,0 +1,29 @@
+<div class="tabla_info">
+  <table>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Price</th>
+	<th>Actions</th>
+      </tr>
+      {{#each list_packages}}
+         <tr>
+           <td>{{id}}</td>
+           <td>{{name}}</td>
+           <td>{{description}}</td>
+           <td>{{price}}</td>
+	   <td>
+             <a href="/add/package_delete/{{id}}" id="delete">Delete</a>
+             <a href="/add/package_edit/{{id}}" id="edit">Edit</a>
+           </td>
+         </tr>
+      {{else}}
+         <div class="card">
+	   <p>You don't have packages created yet</p>
+	   <a href="/packages">Create ONE</a>
+	 <div>
+      {{/each}}
+  </table>
+  <a href="/add/packages" id="new">ADD NEW PACKAGE</a>
+</div>

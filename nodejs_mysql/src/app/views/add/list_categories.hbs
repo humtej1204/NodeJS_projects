@@ -1,0 +1,25 @@
+<div class="tabla_info">
+  <table>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+	<th>Actions</th>
+      </tr>
+      {{#each list_categories}}
+         <tr>
+           <td>{{id}}</td>
+           <td>{{name}}</td>
+	   <td>
+	     <a href="/add/category_delete/{{id}}" id="delete">Delete</a>
+             <a href="/add/category_edit/{{id}}" id="edit">Edit</a>
+	   </td>
+         </tr>
+       {{else}}
+          <div class="card">
+            <p>You don't have categories created yet</p>
+            <a href="/categories">Create ONE</a>
+          <div>
+      {{/each}}
+  </table>
+  <a href="/add/categories" id="new">ADD NEW CATEGORY</a>
+</div>

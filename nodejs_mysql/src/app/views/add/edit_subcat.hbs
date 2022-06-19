@@ -1,0 +1,14 @@
+<div class="form-group">
+  <form action="/add/subcat_edit/{{subcat.id}}" method="post">
+    <h3>ADD NEW SUB-CATEGORY</h3>
+    <div class="form-elements">
+      <p>
+      <input type="text" name="name" placeholder="Name" id="ip_name" value="{{subcat.name}}">
+      </p>
+      <p>
+      <input type="number" name="category_id" min="0" max="5" placeholder="Category ID" id="ip_catID" value="{{subcat.category_id}}">
+      </p>
+    </div>
+    <input type="submit" class="button" value="Editar">
+  </form>
+</div>
