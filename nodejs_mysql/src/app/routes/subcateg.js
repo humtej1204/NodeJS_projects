@@ -2,8 +2,9 @@ const express = require('express');
 const router = express.Router();
 
 const pool = require('../../config/dbConnection');
+const { isLoggedIn } = require('../../lib/auth');
 
-router.get('/subcateg', (req, res) => {
+router.get('/subcateg', isLoggedIn, (req, res) => {
     res.render('add/subcat');
 });
 
@@ -17,18 +18,18 @@ router.post('/subcateg', async (req, res) => {
     res.redirect('/add/subcateg_added')
 });
 
-router.get('/subcateg_added', async (req, res) => {
+router.get('/subcateg_added', isLoggedIn, async (req, res) => {
         const list_subcateg = await pool.query('SELECT * FROM subcateg');
         res.render('add/list_subcateg', {list_subcateg: list_subcateg});
 });
 
-router.get('/subcat_delete/:id', async (req, res) => {
+router.get('/subcat_delete/:id', isLoggedIn, async (req, res) => {
     const { id } = req.params;
     await pool.query('DELETE FROM subcateg WHERE ID = ?', [id]);
     res.redirect('/add/subcateg_added');
 });
 
-router.get('/subcat_edit/:id', async (req, res) => {
+router.get('/subcat_edit/:id', isLoggedIn, async (req, res) => {
     const { id } = req.params;
     const subcat = await pool.query('SELECT * FROM subcateg WHERE ID = ?', [id]);
     res.render('add/edit_subcat', {subcat: subcat[0]});

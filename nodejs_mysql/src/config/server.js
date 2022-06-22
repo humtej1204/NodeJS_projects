@@ -1,16 +1,24 @@
 const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
-const exphbs = require('express-handlebars')
+const exphbs = require('express-handlebars');
+const session = require('express-session');
+const MySQLStore = require('express-mysql-session');
+//const sequelize = require('sequelize');
+//const MySQLStore = require('express-sequelize-session');
+const passport = require('passport');
+
+const { database } = require('../keys');
 
 // Initializations
 const app = express();
+require('../lib/passport');
 
 //settings
 app.set('port', process.env.PORT || 3000);
 
 // HandleBars
-app.set('views', path.join(__dirname, '../app/views'))
+app.set('views', path.join(__dirname, '../app/views'));
 app.engine('.hbs', exphbs.engine({
 	defaultlayout: 'main',
 	layoutsDir: path.join(app.get('views'), 'layouts'),
@@ -21,12 +29,20 @@ app.engine('.hbs', exphbs.engine({
 app.set('view engine', '.hbs');
 
 // Middleware
+app.use(session({
+	secret: 'harusession',
+	resave: false,
+	saveUninitialized: false,
+	store: new MySQLStore(database)
+}));
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(express.json());
+app.use(passport.initialize());
+app.use(passport.session());
 
 // Global variables
 app.use((req, res, next) => {
-
+	app.locals.user = req.user;
 	next();
 });
 

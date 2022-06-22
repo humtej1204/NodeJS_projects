@@ -24,7 +24,7 @@ nav {
 	display:flex;
 	justify-content: space-between;
 	align-items: center;
-	width: 25%;
+	width: 50%;
 }
 main {
 	height: 100%;
@@ -93,11 +93,12 @@ table td {
 	align-items: center;
 	flex-direction: column;
 }
-#delete, #edit {
+#delete, #edit, #login, #signup {
 	color: white;
 	padding: 8px 20px;
 	margin: 1px;
 	text-decoration: none;
+	border: none;
 	border-radius: 5px;
 }
 #delete{
@@ -113,4 +114,17 @@ table td {
 	margin: 10px;
 	text-decoration: none;
 	border-radius: 5px;
+}
+.logo-img {
+  height:300px;
+	width: 300px;
+}
+.logo-img img {
+	height:100%;
+	width: 100%;
+	object-fit: contain;
+}
+#login, #signup {
+	width: 300px;
+	background: green;
 }

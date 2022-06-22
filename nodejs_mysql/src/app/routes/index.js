@@ -13,7 +13,6 @@ FROM pack_subcat
 INNER JOIN packages ON packages.id=pack_subcat.package_id
 INNER JOIN subcateg ON subcateg.id=pack_subcat.subcateg_id
 INNER JOIN categories ON categories.id=subcateg.category_id`);
-	console.log(list_info);
     res.render('add/index', {list_info: list_info});
 });
 

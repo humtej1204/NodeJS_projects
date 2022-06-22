@@ -21,15 +21,24 @@ CREATE TABLE IF NOT EXISTS subcateg(
 	id INT NOT NULL AUTO_INCREMENT,
 	name VARCHAR(255) NOT NULL,
 	category_id INT NOT NULL,
-	PRIMARY KEY(id),
-	FOREIGN KEY (category_id) REFERENCES categories(id)
+	PRIMARY KEY(id)
 );
+ALTER TABLE subcateg ADD CONSTRAINT FOREIGN KEY (category_id) REFERENCES categories(id);
 
 CREATE TABLE IF NOT EXISTS pack_subcat(
 	package_id INT NOT NULL,
-	subcateg_id INT NOT NULL,
-	FOREIGN KEY (package_id) REFERENCES packages(id),
-	FOREIGN KEY (subcateg_id) REFERENCES subcateg(id)
+	subcateg_id INT NOT NULL
+);
+ALTER TABLE pack_subcat ADD CONSTRAINT FOREIGN KEY (package_id) REFERENCES packages(id),
+ADD CONSTRAINT FOREIGN KEY (subcateg_id) REFERENCES subcateg(id);
+
+
+CREATE TABLE users (
+  id INT(11) NOT NULL AUTO_INCREMENT,
+  username VARCHAR(16) NOT NULL,
+  password VARCHAR(60) NOT NULL,
+  fullname VARCHAR(100) NOT NULL,
+  PRIMARY KEY(id)
 );
 
 INSERT INTO packages(name, description, price) VALUES('pack01', 'first package', 100.00);
@@ -66,6 +75,8 @@ INSERT INTO pack_subcat VALUES(7, 4);
 INSERT INTO pack_subcat VALUES(8, 3);
 INSERT INTO pack_subcat VALUES(9, 2);
 INSERT INTO pack_subcat VALUES(10, 1);
+
+INSERT INTO users (username, password, fullname) VALUES ('haru1204', 'password', 'Haru Tejada');
 
 SELECT * FROM packages;
 SELECT * FROM categories;
