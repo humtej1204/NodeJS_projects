@@ -4,7 +4,7 @@ CREATE DATABASE IF NOT EXISTS test_soyclara;
 USE test_soyclara;
 
 CREATE TABLE IF NOT EXISTS packages(
-	id INT NOT NULL AUTO_INCREMENT,
+	id INT NOT NULL AUTO_INCREMENT UNIQUE,
 	name VARCHAR(255) NOT NULL,
 	description TEXT,
 	price FLOAT(7,2) NOT NULL,
@@ -12,30 +12,32 @@ CREATE TABLE IF NOT EXISTS packages(
 );
 
 CREATE TABLE IF NOT EXISTS categories(
-	id INT NOT NULL AUTO_INCREMENT,
-	name VARCHAR(255) NOT NULL,
+	id INT NOT NULL AUTO_INCREMENT UNIQUE,
+	name VARCHAR(255) NOT NULL UNIQUE,
 	PRIMARY KEY(id)
 );
 
 CREATE TABLE IF NOT EXISTS subcateg(
-	id INT NOT NULL AUTO_INCREMENT,
+	id INT NOT NULL AUTO_INCREMENT UNIQUE,
 	name VARCHAR(255) NOT NULL,
 	category_id INT NOT NULL,
+	UNIQUE(name, category_id),
 	PRIMARY KEY(id)
 );
 ALTER TABLE subcateg ADD CONSTRAINT FOREIGN KEY (category_id) REFERENCES categories(id);
 
 CREATE TABLE IF NOT EXISTS pack_subcat(
 	package_id INT NOT NULL,
-	subcateg_id INT NOT NULL
+	subcateg_id INT NOT NULL, 
+	UNIQUE(package_id, subcateg_id)
 );
 ALTER TABLE pack_subcat ADD CONSTRAINT FOREIGN KEY (package_id) REFERENCES packages(id),
 ADD CONSTRAINT FOREIGN KEY (subcateg_id) REFERENCES subcateg(id);
 
 
 CREATE TABLE users (
-  id INT(11) NOT NULL AUTO_INCREMENT,
-  username VARCHAR(16) NOT NULL,
+  id INT(11) NOT NULL AUTO_INCREMENT UNIQUE,
+  username VARCHAR(16) NOT NULL UNIQUE,
   password VARCHAR(60) NOT NULL,
   fullname VARCHAR(100) NOT NULL,
   PRIMARY KEY(id)
@@ -75,8 +77,6 @@ INSERT INTO pack_subcat VALUES(7, 4);
 INSERT INTO pack_subcat VALUES(8, 3);
 INSERT INTO pack_subcat VALUES(9, 2);
 INSERT INTO pack_subcat VALUES(10, 1);
-
-INSERT INTO users (username, password, fullname) VALUES ('haru1204', 'password', 'Haru Tejada');
 
 SELECT * FROM packages;
 SELECT * FROM categories;
