@@ -6,7 +6,15 @@
       <input type="text" name="name" placeholder="Name" id="ip_name">
       </p>
       <p>
-      <input type="number" name="category_id" min="0" placeholder="Category ID" id="ip_catID">
+      Selecciona la categoria a la que pertenecera:
+      </p>
+      <p>
+      <select name="category_id" id="ip_catID" required>
+        <option value="">Elige una opción</option>
+	{{#each list_categ}}
+	<option value="{{id}}">{{name}}</option>
+	{{/each}}
+      </select>
       </p>
     </div>
     <input type="submit" class="button">

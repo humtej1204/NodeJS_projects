@@ -24,8 +24,13 @@ router.get('/categories_added', isLoggedIn, async (req, res) => {
 
 router.get('/category_delete/:id', isLoggedIn, async (req, res) => {
     const { id } = req.params;
+	const subcat = await pool.query('SELECT * FROM subcateg WHERE category_id = ?', [id]);
+	subcat.forEach(async (element) => {
+		await pool.query('DELETE FROM pack_subcat WHERE subcateg_id = ?', [element.id]);
+	});
+	await pool.query('DELETE FROM subcateg WHERE category_id = ?', [id]);
     await pool.query('DELETE FROM categories WHERE ID = ?', [id]);
-    res.redirect('/add/categories_added');
+	res.redirect('/add/categories_added');
 });
 
 router.get('/category_edit/:id', isLoggedIn, async (req, res) => {

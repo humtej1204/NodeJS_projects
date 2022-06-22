@@ -4,18 +4,28 @@ const router = express.Router();
 const pool = require('../../config/dbConnection');
 const { isLoggedIn } = require('../../lib/auth');
 
-router.get('/packages', isLoggedIn, (req, res) => {
-	res.render('add/packages');
+router.get('/packages', isLoggedIn, async (req, res) => {
+	const list_subcateg = await pool.query('SELECT * FROM subcateg');
+	res.render('add/packages', {list_subcateg: list_subcateg});
 });
 
 router.post('/packages', async (req, res) => {
-	const { name, description, price } = req.body;
+	const { name, description, price, subcateg } = req.body;
 	const newPack = {
 		name,
 		description,
 		price
 	};
+	const subcatPack = { subcateg };
 	await pool.query('INSERT INTO packages SET ?', [newPack]);
+	const pack = await pool.query('SELECT * FROM packages WHERE name = ?', [newPack.name]);
+	if (subcateg) {
+		const elem = {
+			package_id: parseInt(pack[0].id),
+			subcateg_id: parseInt(subcateg)
+		};
+		await pool.query('INSERT INTO pack_subcat SET ?', [elem]);
+	}
 	res.redirect('/add/packages_added');
 });
 
@@ -26,6 +36,7 @@ router.get('/packages_added', isLoggedIn, async (req, res) => {
 
 router.get('/package_delete/:id', isLoggedIn, async (req, res) => {
     const { id } = req.params;
+	await pool.query('DELETE FROM pack_subcat WHERE package_id = ?', [id]);
     await pool.query('DELETE FROM packages WHERE ID = ?', [id]);
     res.redirect('/add/packages_added');
 });

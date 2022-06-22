@@ -11,6 +11,15 @@
       <p>
       <textarea name="description" rows="3" placeholder="Description" id="ip_description"></textarea>
       </p>
+      <p>OPCIONAL: Seleccione la Subcategoria a la que pertenecera el Paquete</p>
+      <p>
+      <select name="subcateg">
+        <option value="">Elige una opción</option>
+      {{#each list_subcateg}}
+        <option value="{{id}}">{{name}}</option>
+      {{/each}}
+      </select>
+      </p>
     </div>
     <input type="submit" class="button">
   </form>
