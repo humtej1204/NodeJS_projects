@@ -6,6 +6,7 @@ const packageModel = require('./models/packages');
 const categoryModel = require('./models/categories');
 const subcategoryModel = require('./models/subcateg');
 const pCatSubModel = require('./models/pcat_sc');
+const userModel = require('./models/users');
 
 // Connecting to a database, Passing parameters separately
 const connection = new Sequelize('soyclara_sequelize_test', 'haru', 'password', {
@@ -21,11 +22,12 @@ try {
   console.error('Unable to connect to the database:', error);
 }
 
-
+// Creating Model
 const Package = packageModel(connection, Sequelize);
 const Category = categoryModel(connection, Sequelize);
 const Subcategory = subcategoryModel(connection, Sequelize);
 const pCatSub = pCatSubModel(connection, Sequelize);
+const User = userModel(connection, Sequelize);
 
 // Testing tables syncronization
 connection.sync({ force: false })
@@ -38,5 +40,6 @@ module.exports = {
 	Package, 
 	Category,
 	Subcategory,
-	pCatSub
+	pCatSub,
+	User
 };
