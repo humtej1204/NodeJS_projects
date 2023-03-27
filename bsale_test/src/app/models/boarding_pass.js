@@ -7,34 +7,40 @@ const Seat = require('./seat');
 const Flight = require('./flight');
 
 const BoardingPass = sequelize.define('BoardingPass', {
-    boarding_pass_id: {
+    boardingPassId: {
         type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true,
+        field: 'boarding_pass_id'
     },
-    purchase_id: {
+    purchaseId: {
         type: DataTypes.INTEGER,
         allowNull: false,
+        field: 'purchase_id'
     },
-    passenger_id: {
+    passengerId: {
         type: DataTypes.INTEGER,
         allowNull: false,
+        field: 'passenger_id'
     },
-    seat_type_id: {
+    seatTypeId: {
         type: DataTypes.INTEGER,
         allowNull: false,
+        field: 'seat_type_id'
     },
-    seat_id: {
+    seatId: {
         type: DataTypes.INTEGER,
         allowNull: true,
+        field: 'seat_id'
     },
-    flight_id: {
+    flightId: {
         type: DataTypes.INTEGER,
         allowNull: false,
+        field: 'flight_id'
     },
 }, {
     tableName: 'boarding_pass',
-    timestamps: false
+    timestamps: false,
 });
 
 BoardingPass.belongsTo(Purchase, { foreignKey: 'purchase_id' });

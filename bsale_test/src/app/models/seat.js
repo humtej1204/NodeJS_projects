@@ -4,30 +4,36 @@ const SeatType = require('./seat_type');
 const Airplane = require('./airplane');
 
 const Seat = sequelize.define('Seat', {
-    seat_id: {
-    type: DataTypes.INTEGER,
-    primaryKey: true,
-    autoIncrement: true,
+    seatId: {
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        autoIncrement: true,
+        field: 'seat_id'
     },
-    seat_column: {
+    seatColumn: {
         type: DataTypes.STRING(2),
         allowNull: false,
+        field: 'seat_column'
     },
-    seat_row: {
+    seatRow: {
         type: DataTypes.INTEGER,
         allowNull: false,
+        field: 'seat_row'
     },
-    seat_type_id: {
+    seatTypeId: {
         type: DataTypes.INTEGER,
         allowNull: false,
+        field: 'seat_type_id'
     },
-    airplane_id: {
+    airplaneId: {
         type: DataTypes.INTEGER,
         allowNull: false,
+        field: 'airplane_id'
     },
 }, {
     tableName: 'seat',
-    timestamps: false
+    timestamps: false,
+    underscore: true,
 });
 
 Seat.belongsTo(SeatType, { foreignKey: 'seat_type_id' });

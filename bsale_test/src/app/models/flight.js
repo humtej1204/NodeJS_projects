@@ -3,34 +3,41 @@ const sequelize = require('../../config/db');
 const Airplane = require('./airplane');
 
 const Flight = sequelize.define('Flight', {
-  flight_id: {
+  flightId: {
     type: DataTypes.INTEGER,
     primaryKey: true,
     autoIncrement: true,
+    field: 'flight_id'
   },
-  takeoff_date_time: {
+  takeoffDateTime: {
     type: DataTypes.INTEGER,
     allowNull: false,
+    field: 'takeoff_date_time'
   },
-  takeoff_airport: {
+  takeoffAirport: {
     type: DataTypes.INTEGER,
     allowNull: false,
+    field: 'takeoff_airport'
   },
-  landing_date_time: {
+  landingDateTime: {
     type: DataTypes.INTEGER,
     allowNull: false,
+    field: 'landing_date_time'
   },
-  landing_airport: {
+  landingAirport: {
     type: DataTypes.INTEGER,
     allowNull: false,
+    field: 'landing_airport'
   },
-  airplane_id: {
+  airplaneId: {
     type: DataTypes.INTEGER,
     allowNull: false,
+    field: 'airplane_id'
   },
 }, {
   tableName: 'flight',
-  timestamps: false
+  timestamps: false,
+  underscore: true,
 });
 
 Flight.belongsTo(Airplane, { foreignKey: 'airplane_id' });

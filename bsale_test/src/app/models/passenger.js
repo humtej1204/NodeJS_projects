@@ -2,24 +2,36 @@ const { DataTypes } = require('sequelize');
 const sequelize = require('../../config/db');
 
 const Passenger = sequelize.define('Passenger', {
-    passenger_id: {
+    passengerId: {
         type: DataTypes.INTEGER,
+        primaryKey: true,
+        autoIncrement: true,
+        field: 'passenger_id'
     },
     dni: {
         type: DataTypes.STRING(255),
+        allowNull: false,
+        field: 'dni'
     },
     name: {
         type: DataTypes.STRING(255),
+        allowNull: false,
+        field: 'name'
     },
-    afe: {
+    age: {
         type: DataTypes.INTEGER,
+        allowNull: false,
+        field: 'age'
     },
     country: {
         type: DataTypes.STRING(255),
+        allowNull: false,
+        field: 'country'
     },
 }, {
     tableName: 'passenger',
-    timestamps: false
+    timestamps: false,
+    underscore: true,
 });
 
 module.exports = Passenger;
