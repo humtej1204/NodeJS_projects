@@ -78,7 +78,7 @@ else
 fi
 rm -rf structure core
 
-cp ../templates/index.ts ../templates/.eslintrc.cjs .
+cp ../templates/index.ts ../templates/.eslintrc.cjs ../templates/.gitignore .
 echo "{
   \"proyectName\": \"${proyectName}\",
   \"structure\": \"${arquitectureType}\",
